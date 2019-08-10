@@ -58,7 +58,7 @@ public class BinaryTree<T extends Comparable<T>> {
 	private TreeNode find(T target, TreeNode node) {
 		if (target.compareTo(node.data) > 0) {
 			if (node.right != null) {
-				find(target, node.right);
+				return find(target, node.right);
 			}
 			else {
 				return null;
@@ -66,17 +66,14 @@ public class BinaryTree<T extends Comparable<T>> {
 		}
 		else if ((target.compareTo(node.data) < 0)) {
 			if (node.left != null) {
-				find(target, node.left);
+				return find(target, node.left);
 			}
 			else {
 				return null;
 			}
 		}
-		// incase the data is equal to the node then have to send it as close as possible
-		else {
-			return node;
-		}
-		return null;
+		// incase the data is equal
+		return node;
 	}
 
 	public TreeNode find(T target) {
@@ -92,5 +89,7 @@ public class BinaryTree<T extends Comparable<T>> {
 		tree.append(3);
 		tree.append(6);
 		tree.append(7);
+		System.out.println(tree.find(1));
+		System.out.println(tree.find(6));
 	}
 }
