@@ -42,7 +42,7 @@ public class BinaryTree<T extends Comparable<T>> {
 				while (curr.right != null) {
 					curr = curr.right;
 				}
-				curr.right = new TreeNode(newData);
+				curr.right = new TreeNode	(newData);
 			}
 			else {
 				node.left = new TreeNode(newData);
@@ -56,6 +56,9 @@ public class BinaryTree<T extends Comparable<T>> {
 	}
 
 	public static void main(String[] args) {
-
+		BinaryTree<Integer> tree = new BinaryTree<>(5);
+		tree.append(3);
+		tree.append(6);
+		tree.append(7);
 	}
 }
