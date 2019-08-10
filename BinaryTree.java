@@ -55,6 +55,38 @@ public class BinaryTree<T extends Comparable<T>> {
 		append(newData, root);
 	}
 
+	private TreeNode find(T target, TreeNode node) {
+		if (target.compareTo(node.data) > 0) {
+			if (node.right != null) {
+				find(target, node.right);
+			}
+			else {
+				return null;
+			}
+		}
+		else if ((target.compareTo(node.data) < 0)) {
+			if (node.left != null) {
+				find(target, node.left);
+			}
+			else {
+				return null;
+			}
+		}
+		// incase the data is equal to the node then have to send it as close as possible
+		else {
+			return node;
+		}
+		return null;
+	}
+
+	public TreeNode find(T target) {
+		return find(target, root);
+	}
+
+	public T get(T target) {
+		return target;
+	} 
+
 	public static void main(String[] args) {
 		BinaryTree<Integer> tree = new BinaryTree<>(5);
 		tree.append(3);
