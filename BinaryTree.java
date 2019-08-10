@@ -80,8 +80,8 @@ public class BinaryTree<T extends Comparable<T>> {
 		return find(target, root);
 	}
 
-	public T get(T target) {
-		return target;
+	public TreeNode get(T target) {
+		return find(target, root);
 	} 
 
 	public static void main(String[] args) {
