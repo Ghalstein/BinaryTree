@@ -76,6 +76,37 @@ public class BinaryTree<T extends Comparable<T>> {
 		return node;
 	}
 
+	private TreeNode delete(T target, TreeNode forwardNode, TreeNode curr) {
+		if (target.compareTo(forwardNode.data)) {
+			return delete(target, forwardNode.right, forwardNode);
+		}
+		else if (target.compareTo(root.data)) {
+			return delete(target, forwardNode.left, forwardNode);
+		}
+		else {
+			// when the node is found 
+			if (curr.left == forwardNode) {
+				TreeNode temp = forwardNode;
+				TreeNode trail = curr;
+				while (temp.right != null) {
+					trail = temp;
+					temp = temp.right;
+				}
+				if (temp.left == null) {
+					temp.left = forward.left;
+					temp.right = forward.right;
+				}
+				 
+			}
+			else if (curr.right == forwardNode){
+				curr.right = 
+			}
+			return null;
+				}
+		}
+		return null;
+	}
+
 	public TreeNode find(T target) {
 		return find(target, root);
 	}
@@ -83,6 +114,19 @@ public class BinaryTree<T extends Comparable<T>> {
 	public TreeNode get(T target) {
 		return find(target, root);
 	} 
+
+	public TreeNode delete(T target) {
+		if (target.compareTo(root.data)) {
+			return delete(target, root.right, root);
+		}
+		else if (target.compareTo(root.data)) {
+			return delete(target, root.left, root);
+		}
+		else {
+			// removing root
+			return root;
+		}
+	}
 
 	public static void main(String[] args) {
 		BinaryTree<Integer> tree = new BinaryTree<>(5);
