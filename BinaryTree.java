@@ -96,13 +96,29 @@ public class BinaryTree<T extends Comparable<T>> {
 					temp.left = forward.left;
 					temp.right = forward.right;
 				}
-				 
+				temp.right = forwardNode.right;
+				curr.right = temp;
+				trail.right = temp.left;
+				temp.left = forwardNode.left; 	 
 			}
-			else if (curr.right == forwardNode){
-				curr.right = 
+			else if (curr.right == forwardNode) {
+				if (forwardNode.right == null ) {
+					curr.right = curr.left;
+				}
+				else if (forwardNode.left != null) {
+					TreeNode trail = forwardNode;
+					TreeNode temp = forwardNode.left;
+					while (temp.right != null) {
+						trail = temp;
+						temp = temp.right; 
+					}
+					temp.right = forwardNode.right;
+					curr.right = temp;
+					trail.right = temp.left;
+					temp.left = forwardNode.left;
+				}
 			}
 			return null;
-				}
 		}
 		return null;
 	}
