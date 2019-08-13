@@ -171,8 +171,8 @@ public class BinaryTree<T extends Comparable<T>> {
 		tree.append(7);
 		System.out.println(tree.find(1));
 		System.out.println(tree.find(6));
-		tree.delete(3);
-		System.out.println("Deleted Node: " + tree.find(3));
+		System.out.println("Deleted Node: " + tree.delete(3).data);
+		System.out.println("Find deleted Node: " + tree.find(3));
 		System.out.println("Other Nodes: " + tree.find(6).data);
 		System.out.println("Other Nodes: " + tree.find(7).data);
 		System.out.println("Root Node: " + tree.find(5));
