@@ -94,12 +94,19 @@ public class BinaryTree<T extends Comparable<T>> {
 				}
 				if (temp.left == null) {
 					temp.left = forwardNode.left;
-					temp.right = forwardNode.right;
+				}
+				else {
+					TreeNode leftTemp = temp.left;
+					while (leftTemp.right != null) {
+						leftTemp = leftTemp.right;
+					}
+					leftTemp.right = forwardNode.left;
 				}
 				temp.right = forwardNode.right;
-				curr.right = temp;
-				trail.right = temp.left;
-				temp.left = forwardNode.left; 	 
+				curr.left = temp;
+				trail.right = temp.left;	
+				forwardNode.left = null;
+				forwardNode.right = null;
 			}
 			else if (curr.right == forwardNode) {
 				if (forwardNode.right == null ) {
@@ -116,6 +123,8 @@ public class BinaryTree<T extends Comparable<T>> {
 					curr.right = temp;
 					trail.right = temp.left;
 					temp.left = forwardNode.left;
+					forwardNode.left = null;
+					forwardNode.right = null;
 				}
 			}
 			return null;
@@ -151,8 +160,8 @@ public class BinaryTree<T extends Comparable<T>> {
 		System.out.println(tree.find(1));
 		System.out.println(tree.find(6));
 		tree.delete(3);
-		System.out.println(tree.find(3));
-		System.out.println(tree.find(6));
-		System.out.println(tree.find(7));
+		System.out.println("Deleted Node: " + tree.find(3));
+		System.out.println("Other Nodes: " + tree.find(6));
+		System.out.println("Other Nodes: " + tree.find(7));
 	}
 }
