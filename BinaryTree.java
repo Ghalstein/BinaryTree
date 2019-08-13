@@ -84,7 +84,6 @@ public class BinaryTree<T extends Comparable<T>> {
 			return delete(target, targetNode.left, targetNode);
 		}
 		else {
-			System.out.println("Target Node: " + targetNode);
 			// when the node is found 
 			if (prev.left == targetNode) {
 				if (targetNode.right == null && targetNode.left == null) {
@@ -159,8 +158,24 @@ public class BinaryTree<T extends Comparable<T>> {
 			return delete(target, root.left, root);
 		}
 		else {
-			// removing root
-			return root;
+			TreeNode oldRoot = root;
+			if (root.right == null && root.left == null) {
+				root = null;
+				return oldRoot;
+			}
+			else if (root.right == null) {
+				root = root.left;
+				return oldRoot;
+			}
+			TreeNode temp = root.right;
+			TreeNode trail = oldRoot;
+			while (temp.left != null) {
+				temp = temp.left;
+			} 
+			temp.right = root.right;
+			temp.left = root.left;
+			root = temp;
+			return oldRoot;
 		}
 	}
 
