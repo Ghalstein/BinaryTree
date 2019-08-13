@@ -76,35 +76,71 @@ public class BinaryTree<T extends Comparable<T>> {
 		return node;
 	}
 
-	private TreeNode delete(T target, TreeNode forwardNode, TreeNode curr) {
-		if (target.compareTo(forwardNode.data)) {
-			return delete(target, forwardNode.right, forwardNode);
+	private TreeNode delete(T target, TreeNode targetNode, TreeNode prev) {
+		if (target.compareTo(targetNode.data) > 0) {
+			return delete(target, targetNode.right, targetNode);
 		}
-		else if (target.compareTo(root.data)) {
-			return delete(target, forwardNode.left, forwardNode);
+		else if (target.compareTo(targetNode.data) < 0) {
+			return delete(target, targetNode.left, targetNode);
 		}
 		else {
+			System.out.println("Target Node: " + targetNode);
 			// when the node is found 
-			if (curr.left == forwardNode) {
-				TreeNode temp = forwardNode;
-				TreeNode trail = curr;
+			if (prev.left == targetNode) {
+				if (targetNode.right == null && targetNode.left == null) {
+					prev.left = null;
+				}
+				TreeNode temp = targetNode;
+				TreeNode trail = prev;
 				while (temp.right != null) {
 					trail = temp;
 					temp = temp.right;
 				}
 				if (temp.left == null) {
-					temp.left = forward.left;
-					temp.right = forward.right;
+					temp.left = targetNode.left;
+					return targetNode;
 				}
-				 
+				else {
+					TreeNode leftTemp = temp.left;
+					while (leftTemp.right != null) {
+						leftTemp = leftTemp.right;
+					}
+					leftTemp.right = targetNode.left;
+				}
+				temp.right = targetNode.right;
+				prev.left = temp;
+				trail.right = temp.left;	
+				targetNode.left = null;
+				targetNode.right = null;
+				return targetNode;
 			}
-			else if (curr.right == forwardNode){
-				curr.right = 
+			else if (prev.right == targetNode) {
+
+				if (targetNode.right == null && targetNode.left == null) {
+					prev.left = null;
+				}
+				if (targetNode.right == null ) {
+					prev.right = prev.left;
+					return targetNode;
+				}
+				else if (targetNode.left != null) {
+					TreeNode trail = targetNode;
+					TreeNode temp = targetNode.left;
+					while (temp.right != null) {
+						trail = temp;
+						temp = temp.right; 
+					}
+					temp.right = targetNode.right;
+					prev.right = temp;
+					trail.right = temp.left;
+					temp.left = targetNode.left;
+					targetNode.left = null;
+					targetNode.right = null;
+					return targetNode;
+				}
 			}
 			return null;
-				}
 		}
-		return null;
 	}
 
 	public TreeNode find(T target) {
@@ -116,10 +152,10 @@ public class BinaryTree<T extends Comparable<T>> {
 	} 
 
 	public TreeNode delete(T target) {
-		if (target.compareTo(root.data)) {
+		if (target.compareTo(root.data) > 0) {
 			return delete(target, root.right, root);
 		}
-		else if (target.compareTo(root.data)) {
+		else if (target.compareTo(root.data) < 0) {
 			return delete(target, root.left, root);
 		}
 		else {
@@ -135,5 +171,10 @@ public class BinaryTree<T extends Comparable<T>> {
 		tree.append(7);
 		System.out.println(tree.find(1));
 		System.out.println(tree.find(6));
+		tree.delete(3);
+		System.out.println("Deleted Node: " + tree.find(3));
+		System.out.println("Other Nodes: " + tree.find(6).data);
+		System.out.println("Other Nodes: " + tree.find(7).data);
+		System.out.println("Root Node: " + tree.find(5));
 	}
 }
