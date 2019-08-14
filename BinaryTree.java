@@ -182,7 +182,7 @@ public class BinaryTree<T extends Comparable<T>> {
 	}
 
 	private void preOrder(TreeNode node, ArrayList<T> list) {
-		if (node != null) return;
+		if (node == null) return;
 		list.add(node);
 		preOrder(node.left, list);
 		preOrder(node.right, list);
@@ -195,7 +195,7 @@ public class BinaryTree<T extends Comparable<T>> {
 	}
 
 	private void postOrder(TreeNode node, ArrayList<T> list) {
-		if (node != null) return;
+		if (node == null) return;
 		preOrder(node.left, list);
 		preOrder(node.right, list);
 		list.add(node);
@@ -207,13 +207,18 @@ public class BinaryTree<T extends Comparable<T>> {
 		return list;
 	}
 
+	private void inOrder(TreeNode node, ArrayList<T> list) {
+		if (node == null)  return;
+		inOrder(node, list);
+		list.add(node);
+		inOrder(node, right);
+	}
+
 	public ArrayList<T> traverse() {
 		ArrayList<T> list = new ArrayList<>();
 		inOrder(root, list);
 		return list;
 	}
-
-
 
 	public static void main(String[] args) {
 		BinaryTree<Integer> tree = new BinaryTree<>(4);
