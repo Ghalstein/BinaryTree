@@ -195,20 +195,15 @@ public class BinaryTree<T extends Comparable<T>> {
 	}
 
 	private void postOrder(TreeNode node, ArrayList<T> list) {
-		if (node.left != null) {
-			list.add(node.left.data);
-			postOrder(node.left, list);
-		}
-		if (node.right != null) {
-			list.add(node.right.data);
-			postOrder(node.right, list);
-		}
+		if (node != null) return;
+		preOrder(node.left, list);
+		preOrder(node.right, list);
+		list.add(node);
 	}
 
 	public ArrayList<T> postTraverse() {
 		ArrayList<T> list = new ArrayList<>();
 		postOrder(root, list);
-		list.add(root.data);
 		return list;
 	}
 
