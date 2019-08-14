@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class BinaryTree<T extends Comparable<T>> {
 
 	// top node/ head of the tree
@@ -179,6 +181,44 @@ public class BinaryTree<T extends Comparable<T>> {
 		}
 	}
 
+	private void preOrder(TreeNode node, ArrayList<T> list) {
+		if (node.left != null) {
+			list.add(node.left.data);
+			preLeft(node.left, list);
+		}
+		if (node.right != null) {
+			list.add(node.right.data);
+			preLeft(node.right, list);
+		}
+	}
+
+	public ArrayList<T> preTraverse() {
+		ArrayList<T> list = new ArrayList<>();
+		list.add(root.data);
+		preOrder(root, list);
+		return list;
+	}
+
+	private void postOrder(TreeNode node, ArrayList<T> list) {
+		if (node.left != null) {
+			list.add(node.left.data);
+			preLeft(node.left, list);
+		}
+		if (node.right != null) {
+			list.add(node.right.data);
+			preLeft(node.right, list);
+		}
+	}
+
+	public ArrayList<T> postTraverse() {
+		ArrayList<T> list = new ArrayList<>();
+		list.add(root.data);
+		postOrder(root, list);
+		return list;
+	}
+
+
+
 	public static void main(String[] args) {
 		BinaryTree<Integer> tree = new BinaryTree<>(5);
 		tree.append(3);
@@ -191,5 +231,8 @@ public class BinaryTree<T extends Comparable<T>> {
 		System.out.println("Other Nodes: " + tree.find(6).data);
 		System.out.println("Other Nodes: " + tree.find(7).data);
 		System.out.println("Root Node: " + tree.find(5));
+		tree.append(1);
+		tree.append(2);
+		System.out.println("Prefix: " + tree.preTraverse());
 	}
 }
