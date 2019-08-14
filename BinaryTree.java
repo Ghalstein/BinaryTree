@@ -207,6 +207,12 @@ public class BinaryTree<T extends Comparable<T>> {
 		return list;
 	}
 
+	public ArrayList<T> traverse() {
+		ArrayList<T> list = new ArrayList<>();
+		inOrder(root, list);
+		return list;
+	}
+
 
 
 	public static void main(String[] args) {
