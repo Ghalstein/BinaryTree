@@ -182,19 +182,14 @@ public class BinaryTree<T extends Comparable<T>> {
 	}
 
 	private void preOrder(TreeNode node, ArrayList<T> list) {
-		if (node.left != null) {
-			list.add(node.left.data);
-			preOrder(node.left, list);
-		}
-		if (node.right != null) {
-			list.add(node.right.data);
-			preOrder(node.right, list);
-		}
+		if (node != null) return;
+		list.add(node);
+		preOrder(node.left, list);
+		preOrder(node.right, list);
 	}
 
 	public ArrayList<T> preTraverse() {
 		ArrayList<T> list = new ArrayList<>();
-		list.add(root.data);
 		preOrder(root, list);
 		return list;
 	}
