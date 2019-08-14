@@ -236,7 +236,28 @@ public class BinaryTree<T extends Comparable<T>> {
 		return curr.data;
 	}
 
+	public boolean isBalanced() {
+		int left = 0;
+		int right = 0;
+		TreeNode rNode = root;
+		TreeNode lNode = root;
+		if (root.right != null) {
+			rNode = root.right;
+		}	
+		if (root.left != null) {
+			lNode = root.left;
+		}	
+		while (rNode.right != null) {
+			rNode = rNode.right;
+			++right;
+		}
+		while (lNode.left != null) {
+			lNode = lNode.left;
+			++left;
+		}
 
+		if (left - right)
+	}
 
 	public static void main(String[] args) {
 		BinaryTree<Integer> tree = new BinaryTree<>(4);
