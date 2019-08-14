@@ -231,11 +231,12 @@ public class BinaryTree<T extends Comparable<T>> {
 		System.out.println("Find deleted Node: " + tree.find(3));
 		System.out.println("Other Nodes: " + tree.find(6).data);
 		System.out.println("Other Nodes: " + tree.find(7).data);
-		System.out.println("Root Node: " + tree.find(5));
+		System.out.println("Root Node: " + tree.find(4));
 		tree.append(1);
 		tree.append(2);
 		tree.append(5);
 		System.out.println("Prefix: " + tree.preTraverse());
 		System.out.println("Postfix: " + tree.postTraverse());
+		System.out.println("In Order: " + tree.traverse());
 	}
 }
