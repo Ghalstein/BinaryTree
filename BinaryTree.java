@@ -236,6 +236,8 @@ public class BinaryTree<T extends Comparable<T>> {
 		return curr.data;
 	}
 
+
+
 	public static void main(String[] args) {
 		BinaryTree<Integer> tree = new BinaryTree<>(4);
 		tree.append(3);
@@ -254,5 +256,7 @@ public class BinaryTree<T extends Comparable<T>> {
 		System.out.println("Prefix: " + tree.preTraverse());
 		System.out.println("Postfix: " + tree.postTraverse());
 		System.out.println("In Order: " + tree.traverse());
+		System.out.println("max: " + tree.max());
+		System.out.println("min: " + tree.min());
 	}
 }
