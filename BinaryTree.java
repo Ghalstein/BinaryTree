@@ -228,6 +228,14 @@ public class BinaryTree<T extends Comparable<T>> {
 		return curr.data;
 	}
 
+	public T min() {
+		TreeNode curr = root;
+		while(curr.left != null) {
+			curr = curr.left;
+		}
+		return curr.data;
+	}
+
 	public static void main(String[] args) {
 		BinaryTree<Integer> tree = new BinaryTree<>(4);
 		tree.append(3);
