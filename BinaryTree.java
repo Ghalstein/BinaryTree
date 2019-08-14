@@ -220,6 +220,14 @@ public class BinaryTree<T extends Comparable<T>> {
 		return list;
 	}
 
+	public T max() {
+		TreeNode curr = root;
+		while(curr.right != null) {
+			curr = curr.right;
+		}
+		return curr.data;
+	}
+
 	public static void main(String[] args) {
 		BinaryTree<Integer> tree = new BinaryTree<>(4);
 		tree.append(3);
