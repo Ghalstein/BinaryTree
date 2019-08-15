@@ -289,6 +289,27 @@ public class BST<T extends Comparable<T>> {
 		return true;
 	}
 
+	private void sum(TreeNode node, int sum) {
+		if (node.right == null) {
+			sum += node.data;
+		}
+		else if (node.left == null) {
+			sum += node.data;
+		}
+		else {
+			sum(node.right, sum);
+			sum(node.left, sum);
+		}
+
+
+	}
+
+	public int sumLeafNodes() {
+		int sum = 0;
+		sum(root, sum);
+		return sum;
+	}
+
 	public static void main(String[] args) {
 		BST<Integer> tree = new BST<>(4);
 		tree.append(3);
@@ -313,5 +334,6 @@ public class BST<T extends Comparable<T>> {
 		System.out.println("is symmetrical(false): " + tree.isSymmetrical());
 		BST<Integer> sym = new BST<>(1);
 		System.out.println("is symmetrical(true): " + sym.isSymmetrical());
+		System.out.println("Sum: " + tree.sumLeafNodes());
 	}
 }
