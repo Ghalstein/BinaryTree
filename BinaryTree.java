@@ -256,7 +256,12 @@ public class BinaryTree<T extends Comparable<T>> {
 			++left;
 		}
 
-		if (left - right)
+		if (left - right > -2 || left - right < 2) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	public static void main(String[] args) {
@@ -279,5 +284,6 @@ public class BinaryTree<T extends Comparable<T>> {
 		System.out.println("In Order: " + tree.traverse());
 		System.out.println("max: " + tree.max());
 		System.out.println("min: " + tree.min());
+		System.out.println("is balanced: " + tree.isBalanced());
 	}
 }
