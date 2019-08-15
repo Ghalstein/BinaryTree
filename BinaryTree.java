@@ -266,9 +266,14 @@ public class BinaryTree<T extends Comparable<T>> {
 
 	public boolean isSymmetrical() {
 		ArrayList<T> list = postTraverse();
+
+		int j = list.size() - 1;
 		for (int i = 0; i < list.size() / 2; ++i) {
-			
+			if (list.get(i) != list.get(j--)) {
+				return false;
+			}
 		}
+		return true;
 	}
 
 	public static void main(String[] args) {
