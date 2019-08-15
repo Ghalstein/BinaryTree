@@ -297,5 +297,8 @@ public class BinaryTree<T extends Comparable<T>> {
 		System.out.println("max: " + tree.max());
 		System.out.println("min: " + tree.min());
 		System.out.println("is balanced: " + tree.isBalanced());
+		System.out.println("is symmetrical(false): " + tree.isSymmetrical());
+		BinaryTree<Integer> sym = new BinaryTree<>(1);
+		System.out.println("is symmetrical(true): " + sym.isSymmetrical());
 	}
 }
