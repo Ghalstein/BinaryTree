@@ -220,6 +220,57 @@ public class BinaryTree<T extends Comparable<T>> {
 		return list;
 	}
 
+	public T max() {
+		TreeNode curr = root;
+		while(curr.right != null) {
+			curr = curr.right;
+		}
+		return curr.data;
+	}
+
+	public T min() {
+		TreeNode curr = root;
+		while(curr.left != null) {
+			curr = curr.left;
+		}
+		return curr.data;
+	}
+
+	public boolean isBalanced() {
+		int left = 0;
+		int right = 0;
+		TreeNode rNode = root;
+		TreeNode lNode = root;
+		if (root.right != null) {
+			rNode = root.right;
+		}	
+		if (root.left != null) {
+			lNode = root.left;
+		}	
+		while (rNode.right != null) {
+			rNode = rNode.right;
+			++right;
+		}
+		while (lNode.left != null) {
+			lNode = lNode.left;
+			++left;
+		}
+
+		if (left - right > -2 || left - right < 2) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public boolean isSymmetrical() {
+		ArrayList<T> list = postTraverse();
+		for (int i = 0; i < list.size() / 2; ++i) {
+			
+		}
+	}
+
 	public static void main(String[] args) {
 		BinaryTree<Integer> tree = new BinaryTree<>(4);
 		tree.append(3);
@@ -238,5 +289,8 @@ public class BinaryTree<T extends Comparable<T>> {
 		System.out.println("Prefix: " + tree.preTraverse());
 		System.out.println("Postfix: " + tree.postTraverse());
 		System.out.println("In Order: " + tree.traverse());
+		System.out.println("max: " + tree.max());
+		System.out.println("min: " + tree.min());
+		System.out.println("is balanced: " + tree.isBalanced());
 	}
 }
