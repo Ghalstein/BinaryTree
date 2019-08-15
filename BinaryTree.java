@@ -264,6 +264,13 @@ public class BinaryTree<T extends Comparable<T>> {
 		}
 	}
 
+	public boolean isSymmetrical() {
+		ArrayList<T> list = postTraverse();
+		for (int i = 0; i < list.size() / 2; ++i) {
+			
+		}
+	}
+
 	public static void main(String[] args) {
 		BinaryTree<Integer> tree = new BinaryTree<>(4);
 		tree.append(3);
