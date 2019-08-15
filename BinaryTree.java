@@ -182,42 +182,94 @@ public class BinaryTree<T extends Comparable<T>> {
 	}
 
 	private void preOrder(TreeNode node, ArrayList<T> list) {
-		if (node.left != null) {
-			list.add(node.left.data);
-			preOrder(node.left, list);
-		}
-		if (node.right != null) {
-			list.add(node.right.data);
-			preOrder(node.right, list);
-		}
+		if (node == null) return;
+		list.add(node.data);
+		preOrder(node.left, list);
+		preOrder(node.right, list);
 	}
 
 	public ArrayList<T> preTraverse() {
 		ArrayList<T> list = new ArrayList<>();
-		list.add(root.data);
 		preOrder(root, list);
 		return list;
 	}
 
 	private void postOrder(TreeNode node, ArrayList<T> list) {
-		if (node.left != null) {
-			list.add(node.left.data);
-			postOrder(node.left, list);
-		}
-		if (node.right != null) {
-			list.add(node.right.data);
-			postOrder(node.right, list);
-		}
+		if (node == null) return;
+		preOrder(node.left, list);
+		preOrder(node.right, list);
+		list.add(node.data);
 	}
 
 	public ArrayList<T> postTraverse() {
 		ArrayList<T> list = new ArrayList<>();
 		postOrder(root, list);
-		list.add(root.data);
 		return list;
 	}
 
+	private void inOrder(TreeNode node, ArrayList<T> list) {
+		if (node == null)  return;
+		inOrder(node.left, list);
+		list.add(node.data);
+		inOrder(node.right, list);
+	}
 
+	public ArrayList<T> traverse() {
+		ArrayList<T> list = new ArrayList<>();
+		inOrder(root, list);
+		return list;
+	}
+
+	public T max() {
+		TreeNode curr = root;
+		while(curr.right != null) {
+			curr = curr.right;
+		}
+		return curr.data;
+	}
+
+	public T min() {
+		TreeNode curr = root;
+		while(curr.left != null) {
+			curr = curr.left;
+		}
+		return curr.data;
+	}
+
+	public boolean isBalanced() {
+		int left = 0;
+		int right = 0;
+		TreeNode rNode = root;
+		TreeNode lNode = root;
+		if (root.right != null) {
+			rNode = root.right;
+		}	
+		if (root.left != null) {
+			lNode = root.left;
+		}	
+		while (rNode.right != null) {
+			rNode = rNode.right;
+			++right;
+		}
+		while (lNode.left != null) {
+			lNode = lNode.left;
+			++left;
+		}
+
+		if (left - right > -2 || left - right < 2) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public boolean isSymmetrical() {
+		ArrayList<T> list = postTraverse();
+		for (int i = 0; i < list.size() / 2; ++i) {
+			
+		}
+	}
 
 	public static void main(String[] args) {
 		BinaryTree<Integer> tree = new BinaryTree<>(4);
@@ -230,11 +282,15 @@ public class BinaryTree<T extends Comparable<T>> {
 		System.out.println("Find deleted Node: " + tree.find(3));
 		System.out.println("Other Nodes: " + tree.find(6).data);
 		System.out.println("Other Nodes: " + tree.find(7).data);
-		System.out.println("Root Node: " + tree.find(5));
+		System.out.println("Root Node: " + tree.find(4));
 		tree.append(1);
 		tree.append(2);
 		tree.append(5);
 		System.out.println("Prefix: " + tree.preTraverse());
 		System.out.println("Postfix: " + tree.postTraverse());
+		System.out.println("In Order: " + tree.traverse());
+		System.out.println("max: " + tree.max());
+		System.out.println("min: " + tree.min());
+		System.out.println("is balanced: " + tree.isBalanced());
 	}
 }
