@@ -308,32 +308,6 @@ public class BST<T extends Comparable<T>> {
 		return list;
 	}
 
-	public ArrayList<T> nonRecursiveTraversal() {
-		ArrayList<T> list = new ArrayList<>();
-		Stack<T> left = new Stack<>();
-		Stack<T> revLeft = new Stack<>();
-
-		TreeNode temp = root.left;
-		// does the whole left side first
-		while (temp != null) {
-			TreeNode rightTemp = temp;
-			while (temp.right!= null && rightTemp.right != null) {
-				revLeft.push(rightTemp.right.data);
-				rightTemp = rightTemp.right;
-				while(!revLeft.empty()) {
-					left.push(revLeft.pop());
-				}
-			}
-			left.push(temp.data);
-			temp = temp.left;
-		}
-		while (!left.empty()) {
-			list.add(left.pop());
-		}
-		list.add(root.data);
-		return list;
-	}
-
 	public static void main(String[] args) {
 		BST<Integer> tree = new BST<>(4);
 		tree.append(3);
