@@ -289,25 +289,25 @@ public class BST<T extends Comparable<T>> {
 		return true;
 	}
 
-	private void sum(TreeNode node, int sum) {
+	private void sum(TreeNode node, ArrayList<T> list) {
 		if (node.right == null) {
-			sum += node.data;
+			list.add(node.data);
 		}
 		else if (node.left == null) {
-			sum += node.data;
+			list.add(node.data);
 		}
 		else {
-			sum(node.right, sum);
-			sum(node.left, sum);
+			sum(node.right, list);
+			sum(node.left, list);
 		}
 
 
 	}
 
-	public int sumLeafNodes() {
-		int sum = 0;
-		sum(root, sum);
-		return sum;
+	public ArrayList<T> sumLeafNodes() {
+		ArrayList<T> list = new ArrayList<>();
+		sum(root, list);
+		return list;
 	}
 
 	public static void main(String[] args) {
