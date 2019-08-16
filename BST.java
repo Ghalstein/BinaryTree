@@ -299,14 +299,38 @@ public class BST<T extends Comparable<T>> {
 		else {
 			sum(node.right, list);
 			sum(node.left, list);
-		}
-
-
+		} 
 	}
 
 	public ArrayList<T> sumLeafNodes() {
 		ArrayList<T> list = new ArrayList<>();
 		sum(root, list);
+		return list;
+	}
+
+	public ArrayList<T> nonRecursiveTraversal() {
+		ArrayList<T> list = new ArrayList<>();
+		Stack<T> left = new Stack<>();
+		Stack<T> revLeft = new Stack<>();
+
+		TreeNode temp = root.left;
+		// does the whole left side first
+		while (temp != null) {
+			TreeNode rightTemp = temp;
+			while (temp.right!= null && rightTemp.right != null) {
+				revLeft.push(rightTemp.right.data);
+				rightTemp = rightTemp.right;
+				while(!revLeft.empty()) {
+					left.push(revLeft.pop());
+				}
+			}
+			left.push(temp.data);
+			temp = temp.left;
+		}
+		while (!left.empty()) {
+			list.add(left.pop());
+		}
+		list.add(root.data);
 		return list;
 	}
 
@@ -335,5 +359,6 @@ public class BST<T extends Comparable<T>> {
 		BST<Integer> sym = new BST<>(1);
 		System.out.println("is symmetrical(true): " + sym.isSymmetrical());
 		System.out.println("Sum: " + tree.sumLeafNodes());
+		System.out.println("nonRecursiveTraversal: " + tree.nonRecursiveTraversal());
 	}
 }
