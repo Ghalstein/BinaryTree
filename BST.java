@@ -1,11 +1,11 @@
 import java.util.*;
 
-public class BinaryTree<T extends Comparable<T>> {
+public class BST<T extends Comparable<T>> {
 
 	// top node/ head of the tree
 	private TreeNode root = null;
 
-	public BinaryTree(T data) {
+	public BST(T data) {
 		this.root = new TreeNode(data);
 	}
 
@@ -78,6 +78,7 @@ public class BinaryTree<T extends Comparable<T>> {
 		return node;
 	}
 
+	// deletes the target node in the tree
 	private TreeNode delete(T target, TreeNode targetNode, TreeNode prev) {
 		if (target.compareTo(targetNode.data) > 0) {
 			return delete(target, targetNode.right, targetNode);
@@ -144,14 +145,17 @@ public class BinaryTree<T extends Comparable<T>> {
 		}
 	}
 
+	// finds the target node in the tree
 	public TreeNode find(T target) {
 		return find(target, root);
 	}
 
+	// returns the target node in the tree
 	public TreeNode get(T target) {
 		return find(target, root);
 	} 
 
+	// public caller for delete
 	public TreeNode delete(T target) {
 		if (target.compareTo(root.data) > 0) {
 			return delete(target, root.right, root);
@@ -181,6 +185,8 @@ public class BinaryTree<T extends Comparable<T>> {
 		}
 	}
 
+
+	//prefix traversal
 	private void preOrder(TreeNode node, ArrayList<T> list) {
 		if (node == null) return;
 		list.add(node.data);
@@ -188,12 +194,14 @@ public class BinaryTree<T extends Comparable<T>> {
 		preOrder(node.right, list);
 	}
 
+	//caller for prefix
 	public ArrayList<T> preTraverse() {
 		ArrayList<T> list = new ArrayList<>();
 		preOrder(root, list);
 		return list;
 	}
 
+	//post order traversal
 	private void postOrder(TreeNode node, ArrayList<T> list) {
 		if (node == null) return;
 		preOrder(node.left, list);
@@ -201,12 +209,14 @@ public class BinaryTree<T extends Comparable<T>> {
 		list.add(node.data);
 	}
 
+	//caller for postfix
 	public ArrayList<T> postTraverse() {
 		ArrayList<T> list = new ArrayList<>();
 		postOrder(root, list);
 		return list;
 	}
 
+	// inorder traversal
 	private void inOrder(TreeNode node, ArrayList<T> list) {
 		if (node == null)  return;
 		inOrder(node.left, list);
@@ -214,12 +224,14 @@ public class BinaryTree<T extends Comparable<T>> {
 		inOrder(node.right, list);
 	}
 
+	// caller for inorder traversal
 	public ArrayList<T> traverse() {
 		ArrayList<T> list = new ArrayList<>();
 		inOrder(root, list);
 		return list;
 	}
 
+	// returns max in the BST
 	public T max() {
 		TreeNode curr = root;
 		while(curr.right != null) {
@@ -228,6 +240,7 @@ public class BinaryTree<T extends Comparable<T>> {
 		return curr.data;
 	}
 
+	// returns min in the BST
 	public T min() {
 		TreeNode curr = root;
 		while(curr.left != null) {
@@ -266,13 +279,39 @@ public class BinaryTree<T extends Comparable<T>> {
 
 	public boolean isSymmetrical() {
 		ArrayList<T> list = postTraverse();
+
+		int j = list.size() - 1;
 		for (int i = 0; i < list.size() / 2; ++i) {
-			
+			if (list.get(i) != list.get(j--)) {
+				return false;
+			}
 		}
+		return true;
+	}
+
+	private void sum(TreeNode node, ArrayList<T> list) {
+		if (node.right == null) {
+			list.add(node.data);
+		}
+		else if (node.left == null) {
+			list.add(node.data);
+		}
+		else {
+			sum(node.right, list);
+			sum(node.left, list);
+		}
+
+
+	}
+
+	public ArrayList<T> sumLeafNodes() {
+		ArrayList<T> list = new ArrayList<>();
+		sum(root, list);
+		return list;
 	}
 
 	public static void main(String[] args) {
-		BinaryTree<Integer> tree = new BinaryTree<>(4);
+		BST<Integer> tree = new BST<>(4);
 		tree.append(3);
 		tree.append(6);
 		tree.append(7);
@@ -292,5 +331,9 @@ public class BinaryTree<T extends Comparable<T>> {
 		System.out.println("max: " + tree.max());
 		System.out.println("min: " + tree.min());
 		System.out.println("is balanced: " + tree.isBalanced());
+		System.out.println("is symmetrical(false): " + tree.isSymmetrical());
+		BST<Integer> sym = new BST<>(1);
+		System.out.println("is symmetrical(true): " + sym.isSymmetrical());
+		System.out.println("Sum: " + tree.sumLeafNodes());
 	}
 }
