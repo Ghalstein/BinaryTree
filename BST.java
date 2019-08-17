@@ -323,6 +323,24 @@ public class BST<T extends Comparable<T>> {
 		return list;
 	}
 
+	public TreeNode findTheKthNode(int target) {
+		Stack<TreeNode> stack = new Stack<>();
+		int count = 0;
+		TreeNode curr = root;
+		while (curr != null || !stack.empty()) {
+			if (curr.left != null) {
+				stack.push(curr);
+			}
+			else {
+				TreeNode temp = stack.pop();
+				if (++count) {
+					return temp;
+				}
+			}
+		}
+		return null;
+	}
+
 	public static void main(String[] args) {
 		BST<Integer> tree = new BST<>(4);
 		tree.append(3);
