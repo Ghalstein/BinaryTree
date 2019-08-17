@@ -328,14 +328,16 @@ public class BST<T extends Comparable<T>> {
 		int count = 0;
 		TreeNode curr = root;
 		while (curr != null || !stack.empty()) {
-			if (curr.left != null) {
+			if (curr != null) {
 				stack.push(curr);
+				curr = curr.left;
 			}
 			else {
-				TreeNode temp = stack.pop();
-				if (++count) {
-					return temp;
+				curr = stack.pop();
+				if (++count == target) {
+					return curr;
 				}
+				curr = curr.right;
 			}
 		}
 		return null;
@@ -367,5 +369,6 @@ public class BST<T extends Comparable<T>> {
 		System.out.println("is symmetrical(true): " + sym.isSymmetrical());
 		System.out.println("Sum: " + tree.sumLeafNodes());
 		System.out.println("nonRecursivePreFixTraversal: " + tree.nonRecursivePreOrderTraversal());
+		System.out.println("Find the kth node: " + tree.findTheKthNode(5).data);
 	}
 }
