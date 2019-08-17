@@ -308,6 +308,22 @@ public class BST<T extends Comparable<T>> {
 		return list;
 	}
 
+	public ArrayList<T> nonRecursivePreOrderTraversal() {
+		Queue<TreeNode> queue = Queue<>();
+		ArrayList<T> list = ArrayList<>();
+		TreeNode curr = root;
+		while (!queue.empty() || curr != null) {
+			if (curr.left != null) {
+				queue.add(curr);
+				curr = curr.left;
+			}
+			else if (curr.right != null) {
+				list.add(queue.remove());
+				curr = curr.right;
+			}
+		}
+	}
+
 	public static void main(String[] args) {
 		BST<Integer> tree = new BST<>(4);
 		tree.append(3);
