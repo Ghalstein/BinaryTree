@@ -309,17 +309,15 @@ public class BST<T extends Comparable<T>> {
 	}
 
 	public ArrayList<T> nonRecursivePreOrderTraversal() {
-		Queue<TreeNode> queue = Queue<>();
-		ArrayList<T> list = ArrayList<>();
-		TreeNode curr = root;
-		while (!queue.empty() || curr != null) {
-			if (curr.left != null) {
-				queue.add(curr);
-				curr = curr.left;
-			}
-			else if (curr.right != null) {
-				list.add(queue.remove());
-				curr = curr.right;
+		Stack<TreeNode> stack = new Stack<>();
+		ArrayList<T> list = new ArrayList<>();
+		stack.push(root);
+		while (!stack.empty()) {
+			TreeNode curr = stack.pop();
+			if (curr != null) {
+				list.add(curr.data);
+				stack.push(curr.right);
+				stack.push(curr.left);
 			}
 		}
 		return list;
