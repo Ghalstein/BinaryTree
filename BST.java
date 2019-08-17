@@ -322,6 +322,7 @@ public class BST<T extends Comparable<T>> {
 				curr = curr.right;
 			}
 		}
+		return list;
 	}
 
 	public static void main(String[] args) {
@@ -349,6 +350,6 @@ public class BST<T extends Comparable<T>> {
 		BST<Integer> sym = new BST<>(1);
 		System.out.println("is symmetrical(true): " + sym.isSymmetrical());
 		System.out.println("Sum: " + tree.sumLeafNodes());
-		System.out.println("nonRecursiveTraversal: " + tree.nonRecursiveTraversal());
+		System.out.println("nonRecursivePreFixTraversal: " + tree.nonRecursivePreOrderTraversal());
 	}
 }
