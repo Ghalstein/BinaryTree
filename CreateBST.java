@@ -2,6 +2,9 @@
 * Creates a BST from a sorted Array
 * In order to do this will have to cut the array in half to find the middle
 * root element -- then branch off accordingly from each side
+* From here the objective is to add the elements in a binary pattern
+* Have to first add middle then right and left middles to that middle node
+* until all nodes are complete
 */
 
 public class CreateBST {
@@ -16,32 +19,19 @@ public class CreateBST {
     }
   }
 
-  private ListNode root = null;
-
-
-  public CreateBST (int[] sortedArr) {
+  
+   // must be a sorted array to make a bst out of it
+   public static ListNode generate(int[] arr) {
+    ListNode root = null;
     if (sortedArr.length % 2 == 1) {
-      this.root = new ListNode(sortedArr[(sortedArr.length / 2) + 1]);
+      root = new ListNode(sortedArr[(sortedArr.length / 2) + 1]);
     }
-    else this.root = new ListNode(sortedArr[sortedArr.length / 2]);
+    else root = new ListNode(sortedArr[sortedArr.length / 2]);
+
+    return root;
+
   }
 
-  // creates the left side
-  private static void left(int[] arr, int currIndex, ListNode curr) {
-    while (currIndex >= 0) {
-      if (curr.right == null) {
-        curr.right = new ListNode(arr[currIndex--]);
-      } else if (curr.left == null) {
-        curr.left = new ListNode(arr[currIndex--]);
-      }
-    }
-  }
-
-  // creates the right side
-  private static void right(int[] arr, int currIndex, ListNode curr) {
-    while (currIndex < arr.length) {
-
-    }
   }
 
 
