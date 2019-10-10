@@ -19,7 +19,12 @@ public class CreateBST {
     }
   }
 
-  
+  // iterates recrusively through the rest of the array as pre-fix
+  private static void generate(int[] arr, int mid) {
+
+  }
+
+
    // must be a sorted array to make a bst out of it
    public static ListNode generate(int[] arr) {
     ListNode root = null;
