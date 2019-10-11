@@ -20,24 +20,39 @@ public class CreateBST {
   }
 
   // iterates recrusively through the rest of the array as pre-fix
-  private static void generate(int[] arr, int mid) {
-
+  private static void generate(int[] arr, int mid, ListNode node) {
+    int midpoint = mid / 2;
+    // left node first
+    if (mid - midpoint >= 0) {
+      node.left = new ListNode(arr[mid - midpoint]);
+      generate(arr, mid - midpoint, node.left);
+    }
+    if (mid + midpoint < arr.length) {
+      node.right = new ListNode(arr[mid + midpoint]);
+      generate(arr, mid + midpoint, node.right);
+    }
   }
 
 
-   // must be a sorted array to make a bst out of it
-   public static ListNode generate(int[] arr) {
+  // must be a sorted array to make a bst out of it
+  public static ListNode generate(int[] arr) {
+    int mid = 0;
     ListNode root = null;
     if (sortedArr.length % 2 == 1) {
-      root = new ListNode(sortedArr[(sortedArr.length / 2) + 1]);
+      mid = (sortedArr.length / 2) + 1;
+      root = new ListNode(sortedArr[mid]);
     }
-    else root = new ListNode(sortedArr[sortedArr.length / 2]);
+    else {
+      mid = (sortedArr.length / 2);
+      root = new ListNode(sortedArr[mid]);
+    }
+
+    generate(arr, mid, root);
 
     return root;
-
   }
 
-  }
+}
 
 
 
