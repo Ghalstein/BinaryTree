@@ -33,18 +33,16 @@ public class CreateBST {
     }
   }
 
-
   // must be a sorted array to make a bst out of it
   public static ListNode generate(int[] arr) {
     int mid = 0;
     ListNode root = null;
-    if (sortedArr.length % 2 == 1) {
-      mid = (sortedArr.length / 2) + 1;
-      root = new ListNode(sortedArr[mid]);
-    }
-    else {
-      mid = (sortedArr.length / 2);
-      root = new ListNode(sortedArr[mid]);
+    if (arr.length % 2 == 1) {
+      mid = (arr.length / 2) + 1;
+      root = new ListNode(arr[mid]);
+    } else {
+      mid = (arr.length / 2);
+      root = new ListNode(arr[mid]);
     }
 
     generate(arr, mid, root);
@@ -52,12 +50,10 @@ public class CreateBST {
     return root;
   }
 
-}
-
-
-
-
   public static void main(String[] args) {
-
+    int[] arr = {0,1,2,3,4,5,6,7,8,9,10};
+    ListNode tree = generate(arr);
+    System.out.println(tree.right);
+    System.out.println(tree.left);
   }
 }
